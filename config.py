@@ -4,7 +4,13 @@ class Config:
     '''
     General configuration parent class
     '''
-    pass
+    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://liz:lizzie@localhost/househunting'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'powerfulsecretkey'
+
+    @staticmethod
+    def init_app(app):
+        pass
 
 class ProdConfig(Config):
     '''
