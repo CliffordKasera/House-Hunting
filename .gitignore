@@ -2,6 +2,9 @@
 virtual/
 *.pyc
 .vscode/
-start.sh
+venv/
+.idea/
+config.py
+migrations/
 
 

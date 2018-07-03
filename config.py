@@ -4,7 +4,7 @@ class Config:
     '''
     General configuration parent class
     '''
-    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://liz:lizzie@localhost/househunting'
+    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://adiela@localhost/househunting'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'powerfulsecretkey'
 
