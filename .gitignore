@@ -1,1 +1,11 @@
+.DS_Store
 virtual/
+*.pyc
+.vscode/
+venv/
+.idea/
+config.py
+migrations/
+start.sh
+
+
