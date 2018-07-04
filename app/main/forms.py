@@ -10,7 +10,7 @@ class ListingForm(FlaskForm):
     location = SelectField('Neighbourhood', choices=[('eastleigh', 'Eastleigh'), ('karen', 'Karen'),
                                                      ('kileleshwa', 'Kileleshwa'), ('Langata', 'Langata'),
                                                      ('lavington', 'Lavington'), ('muthaiga', 'Muthaiga'),
-                                                     ('ngara', 'Ngara'), ('runda', 'Runda'),
+                                                     ('ngara', 'Ngara'), ('runda', 'Runda'), ('donholm', 'Donholm'),
                                                      ('south-B', 'South-B'), ('south-C', 'South-C'),
                                                      ('upperhill', 'Upperhill'), ('westlands', 'Westlands')])
     category = SelectField('Type', validators=[Required], choices=[('apartment', 'Apartment'),

@@ -6,5 +6,6 @@ venv/
 .idea/
 config.py
 migrations/
+start.sh
 
 
