@@ -43,7 +43,7 @@ def listing():
 
     if list_form.validate_on_submit():
 
-        new_listing = Listing(images=list_form.images.data, location=list_form.location.data, category = list_form.category.data, pricing = list_form.pricing.data, bedrooms = list_form.bedrooms.data, time = list_form.time-slot-date.data  user = current_user)
+        new_listing = Listing(images=list_form.images.data, location=list_form.location.data, category = list_form.category.data, pricing = list_form.pricing.data, bedrooms = list_form.bedrooms.data, startTime = list_form.view_start_time.data, endTime =list_form.view_end_time.data, user = current_user)
         new_listing.save_listing()
 
         return redirect(url_for('.singlelisting'))
@@ -80,6 +80,8 @@ def booking():
     '''
     View booking function that returns the booking page and data
     '''
+    user = User.query.filter_by(username = uname).first()
+
     get_all_bookings = Timeslot.query.filter_by(listing = listing.id).all()
     # booking_form = BookingForm()
 
@@ -88,7 +90,7 @@ def booking():
     #     new_booking.save_booking()
 
 
-    return render_template('booking.html', booking = get_all_bookings)
+    return render_template('booking.html', booking = get_all_bookings, user=user)
 
 
 
