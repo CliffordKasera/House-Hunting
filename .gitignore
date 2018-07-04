@@ -4,6 +4,7 @@ virtual/
 .vscode/
 start.sh
 migrations/
+config.py
 
 
 
