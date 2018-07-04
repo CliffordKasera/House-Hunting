@@ -3,5 +3,9 @@ virtual/
 *.pyc
 .vscode/
 start.sh
-
+migrations/
+* __pycache__/
+config.py
+templates
+models.py
 

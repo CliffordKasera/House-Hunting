@@ -35,10 +35,6 @@ class User(UserMixin,db.Model):
         return f'{self.username}'
 
 
-class House(db.Model):
 
-    __tablename__ = 'houses'
-    id = db.Column(db.Integer, primary_key = True)
-    image
 
 
