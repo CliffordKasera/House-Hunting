@@ -3,6 +3,9 @@ from flask_wtf.file import FileField, FileAllowed
 from wtforms import SubmitField, MultipleFileField, SelectField, IntegerField, DateField, TimeField, TextAreaField, StringField
 from wtforms.validators import DataRequired
 from ..models import User
+from wtforms import StringField, SubmitField, MultipleFileField, SelectField, IntegerField, DateField, TimeField, TextAreaField
+from wtforms.validators import Required
+from ..models import User, Booking
 from wtforms import ValidationError
 
 
@@ -26,3 +29,10 @@ class ListingForm(FlaskForm):
     view_start_time = TimeField('From', validators=[DataRequired()])
     view_end_time = TimeField('To', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
+class BookingForm(FlaskForm):
+    email = StringField('Your Email Address',validators=[Required(),Email()])
+    contact = ContactField('Your Contact',validators =[Required()])
+    name = NameField('Your name'),validators =[Required()])
+    submit = SubmitField('Sign In')
