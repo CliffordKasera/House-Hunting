@@ -8,3 +8,9 @@ config.py
 migrations/
 start.sh
 config.py
+migrations/
+* __pycache__/
+config.py
+templates
+models.py
+
