@@ -5,6 +5,9 @@ virtual/
 venv/
 .idea/
 config.py
+venv/
+.idea/
+config.py
 migrations/
 start.sh
 config.py

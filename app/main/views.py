@@ -2,20 +2,21 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..models import Listing, User, Image, Timeslot, Booking
 from .forms import ListingForm, BookingForm
+from flask_login import login_required, current_user
 # Views
 @main.route('/', methods = ['GET', 'POST'])
 def index():
     '''
     View home function that returns the home page
     '''
-    Apartment = Listing.query.filter_by(category="Apartment").all()
-    Bungalow = Listing.query.filter_by(category="Bungalow").all()
-    Maisonete = Listing.query.filter_by(category="Maisonete").all()
-    listing = Listing.query.filter_by(lister_id).first()
+    apartment =  Listing.query.filter_by(category = 'apartment').all()
+    bungalow = Listing.query.filter_by(category="bungalow").all()
+    maisonette = Listing.query.filter_by(category="maisonete")
+    listing = Listing.query.filter_by().all()
 
     title = 'Home | Boma Listing'
-    return render_template('index.html', title = title, apartment = Apartment, bungalow = Bungalow, maisonette = Maisonette, listing = listing)
-   
+    return render_template('index.html', title = title, apartment = apartment, bungalow = bungalow, maisonette = maisonette, listing = listing)
+
 
 @main.route('/user/<uname>')
 @login_required
@@ -26,7 +27,7 @@ def profile(uname):
     user = User.query.filter_by(username = uname).first()
     title = f"{uname.capitalize()}'s Profile"
 
-    get_all_listings = Listing.query.filter_by(agent = User.id).all()
+    get_all_listings = Listing.query.filter_by(lister_id= User.id).all()
 
     if user is None:
         abort (404)
@@ -41,17 +42,27 @@ def listing():
     '''
     list_form = ListingForm()
 
-    if list_form.validate_on_submit():
-
-        new_listing = Listing(images=list_form.images.data, location=list_form.location.data, category = list_form.category.data, pricing = list_form.pricing.data, bedrooms = list_form.bedrooms.data, startTime = list_form.view_start_time.data, endTime =list_form.view_end_time.data, user = current_user)
-        new_listing.save_listing()
-
-        return redirect(url_for('.singlelisting'))
+    # if list_form.validate_on_submit():
+    #
+    #     new_listing = Listing( location=list_form.location.data, category = list_form.category.data, pricing = list_form.pricing.data, bedrooms = list_form.bedrooms.data, user = current_user)
+    #     new_listing.save_listing()
+    #     new_timeslot = Timeslot (date = list_form.date.data, start_time = list_form.view_start_time.data, end_time = list_form.view_end_time.data,listing_id=listing.id)
+    #
+    #     for image in list_form.image.data:
+    #     #     new_image = Im
+    #     #
+    #     # filename = photos.save(request.files['photo'])
+    #     # path = f'photos/{filename}'
+    #     # user.profile_pic_path = path
+    #     # db.session.commit()
+    #
+    #
+    #     return redirect(url_for('.index'))
 
 
     title = 'New Listing'
-    return render_template('listing.html', listing_form = list_form)
-    
+    return render_template('listing.html', list_form = list_form)
+
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
@@ -80,8 +91,6 @@ def booking():
     '''
     View booking function that returns the booking page and data
     '''
-    user = User.query.filter_by(username = uname).first()
-
     get_all_bookings = Timeslot.query.filter_by(listing = listing.id).all()
     # booking_form = BookingForm()
 
@@ -90,8 +99,4 @@ def booking():
     #     new_booking.save_booking()
 
 
-    return render_template('booking.html', booking = get_all_bookings, user=user)
-
-
-
-
+    return render_template('booking.html', booking = get_all_bookings)
