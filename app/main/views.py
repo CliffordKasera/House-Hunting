@@ -1,10 +1,10 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
-from ..models import Listing, User, Image, Timeslot
-from .forms import ListingForm
+from ..models import Listing, User, Image, Timeslot, Booking
+from .forms import ListingForm, BookingForm
 # Views
 @main.route('/', methods = ['GET', 'POST'])
-def home():
+def index():
     '''
     View home function that returns the home page
     '''
@@ -14,10 +14,11 @@ def home():
     listing = Listing.query.filter_by(lister_id).first()
 
     title = 'Home | Boma Listing'
-    return render_template('index.html', title = title, Apartment = Apartment, Bungalow = Bungalow, Maisonette = Maisonette, listing = listing)
+    return render_template('index.html', title = title, apartment = Apartment, bungalow = Bungalow, maisonette = Maisonette, listing = listing)
    
 
 @main.route('/user/<uname>')
+@login_required
 def profile(uname):
     '''
     View profile page function that returns the profile page and its data
@@ -33,6 +34,7 @@ def profile(uname):
     return render_template("profile/profile.html", user = user, title=title, listings = get_all_listings)
 
 @main.route('/listing/new',methods = ['GET','POST'])
+@login_required
 def listing():
     '''
     View listing function that returns the listing page and data
@@ -40,14 +42,8 @@ def listing():
     list_form = ListingForm()
 
     if list_form.validate_on_submit():
-        images = list_form.images.data
-        location = list_form.location.data
-        category = list_form.category.data
-        bedrooms = list_form.bedrooms.data
-        pricing = list_form.pricing.data
-        timeSlotDate = list_form.time-slot-date.data
 
-        new_listing = Pitch(images=images, location=location, category = category, pricing = pricing, bedrooms = bedrooms, time = timeSlotDate  user = current_user)
+        new_listing = Listing(images=list_form.images.data, location=list_form.location.data, category = list_form.category.data, pricing = list_form.pricing.data, bedrooms = list_form.bedrooms.data, time = list_form.time-slot-date.data  user = current_user)
         new_listing.save_listing()
 
         return redirect(url_for('.singlelisting'))
@@ -78,5 +74,22 @@ def update_profile(uname):
         return redirect(url_for('.profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)
+
+@main.route('/user/profile/booking/',methods = ['GET', 'POST'])
+def booking():
+    '''
+    View booking function that returns the booking page and data
+    '''
+    get_all_bookings = Timeslot.query.filter_by(listing = listing.id).all()
+    # booking_form = BookingForm()
+
+    # if booking_form.validate_on_submit():
+    #     new_booking = Booking(email=booking_form.email.data, name=booking_form.name.data, contact = booking_form.contact.data)
+    #     new_booking.save_booking()
+
+
+    return render_template('booking.html', booking = get_all_bookings)
+
+
 
 
