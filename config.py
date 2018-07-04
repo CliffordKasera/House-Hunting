@@ -4,7 +4,7 @@ class Config:
     '''
     General configuration parent class
     '''
-    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://liz:lizzie@localhost/househunting'
+    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://njeri:sophia@localhost/househunting'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'powerfulsecretkey'
 
@@ -26,14 +26,14 @@ class TestConfig(Config):
     Testing configuration child class
 
     Args:
-        Config: The parent configuration class with General configuration settings 
+        Config: The parent configuration class with General configuration settings
     '''
     pass
 
 class DevConfig(Config):
     '''
     Development configuration child class
-    
+
     Args:
         Config: The parent configuration class with General configuration settings
     '''

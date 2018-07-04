@@ -2,6 +2,6 @@
 virtual/
 *.pyc
 .vscode/
+migrations/
 start.sh
-
-
+config.py

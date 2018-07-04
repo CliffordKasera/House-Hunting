@@ -13,7 +13,7 @@ def load_user(user_id):
 
 
 class User(UserMixin,db.Model):
-    
+
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(255))
@@ -33,12 +33,3 @@ class User(UserMixin,db.Model):
 
     def __repr__(self):
         return f'{self.username}'
-
-
-class House(db.Model):
-
-    __tablename__ = 'houses'
-    id = db.Column(db.Integer, primary_key = True)
-    image
-
-
