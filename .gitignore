@@ -2,10 +2,12 @@
 virtual/
 *.pyc
 .vscode/
+<<<<<<< HEAD
 venv/
 .idea/
 config.py
+=======
+>>>>>>> Sophia
 migrations/
 start.sh
-
-
+config.py
