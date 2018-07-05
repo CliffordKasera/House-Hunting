@@ -4,15 +4,12 @@ virtual/
 .vscode/
 venv/
 .idea/
-config.py
+
 venv/
 .idea/
-config.py
+
 migrations/
 start.sh
-config.py
+
 migrations/
 * __pycache__/
-config.py
-models.py
-
