@@ -1,0 +1,27 @@
+{% macro displayListings(listings)%}
+{% if listings%}
+    <div class="container-fluid">
+        <div class="row">
+        {% for list in listings %}
+                    <div class="col-sm-6 col-md-4">
+                        <div class="card article">
+                            <a href="#" target="_blank">
+                                <img class="card-img-top" src="{{url_for('static',filename = list.image.image_path)}}" alt="Image of ">
+                            </a>
+                            <div class="card-body">
+                                <h4 class="card-title">{{list.title}}</h4>
+                                <hr>
+                                <p class="metadata">Located in {{list.location}}</p>
+                                <p class="metadata">Priced at KES {{list.pricing}}</p>
+                                <p> <small class="text-muted">{{list.category}} | {{list.bedrooms}}</small></p>
+                                <a href="{{url_for('main.index',listing_id=list.id)}}" class= "btn btn-primary btn-sm">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+        {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    Display me
+    {% endif %}
+{% endmacro %}
