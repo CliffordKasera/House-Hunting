@@ -8,6 +8,7 @@ from wtforms import ValidationError
 
 class ListingForm(FlaskForm):
     # images = MultipleFileField('Upload a few images',validators=[FileAllowed(['jpg', 'png']), Required()])
+    title = StringField('Title',validators =[Required()])
     location = SelectField('Neighbourhood', choices=[('eastleigh', 'Eastleigh'), ('karen', 'Karen'),
                                                      ('kileleshwa', 'Kileleshwa'), ('Langata', 'Langata'),
                                                      ('lavington', 'Lavington'), ('muthaiga', 'Muthaiga'),
@@ -25,11 +26,20 @@ class ListingForm(FlaskForm):
     # view_date = DateField('Date', validators=[Required()])
     # view_start_time = TimeField('From', validators=[Required()])
     # view_end_time = TimeField('To', validators=[Required()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Next')
 
 
 class BookingForm(FlaskForm):
     email = StringField('Your Email Address',validators=[Required(),Email()])
     contact = StringField('Your Contact',validators =[Required()])
     name = StringField('Your name',validators =[Required()])
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Book')
+
+
+
+class UpdateProfile(FlaskForm):
+    bio = TextAreaField('Write something about yourself',validators=[Required()])
+    submit = SubmitField('Submit')
+
+class TestForm(FlaskForm):
+    submit = SubmitField('Add Time')
