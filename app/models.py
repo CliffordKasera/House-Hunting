@@ -56,6 +56,7 @@ class Listing(db.Model):
     category = db.Column(db.String(255))
     bedrooms = db.Column(db.String(255))
     pricing = db.Column(db.Integer)
+    featured_pic_path = db.Column(db.String())
     lister_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     image  = db.relationship('Image', backref = 'listing', lazy = 'dynamic')
     timeslot = db.relationship('Timeslot', backref = 'listing', lazy = 'dynamic')
@@ -116,6 +117,10 @@ class Timeslot(db.Model):
     def get_all_timeslots(cls):
         timeslots = Timeslot.query.order_by('id').all()
         return timeslots
+
+    def save_timeslot(self):
+        db.session.add(self)
+        db.session.commit()
 
 
 class Booking(db.Model):
