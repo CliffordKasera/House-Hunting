@@ -9,7 +9,7 @@ venv/
 .idea/
 
 migrations/
-start.sh
+
 
 migrations/
 * __pycache__/
