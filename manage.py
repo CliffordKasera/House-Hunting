@@ -1,9 +1,9 @@
-from app import create_app,db
+from app import create_app
 from flask_script import Manager,Server
 # Connect to models
-from app.models import User
+# from app.models import User
 # Set up migrations
-from flask_migrate import Migrate,MigrateCommand
+# from flask_migrate import Migrate,MigrateCommand
 
 # Creating app instance
 # app = create_app('test')
@@ -15,7 +15,7 @@ app = create_app('development')
 manager = Manager(app)
 
 # Create migrate instance
-migrate = Migrate(app,db)
+# migrate = Migrate(app,db)
 
 manager.add_command('server',Server)
 manager.add_command('db',MigrateCommand)

@@ -16,6 +16,7 @@ def index():
     return render_template('index.html', title = title)
 
 
+
 @main.route('/single_listing/listing/<int:id>', methods = ['GET','POST'])
 @login_required
 def single_listing(id):
@@ -23,31 +24,27 @@ def single_listing(id):
     '''
     view function that returns single listing page and its data
     '''
-    form = ListingForm()
+    form = BookingForm()
     single_listing = Listing.query.get(id = id)
     if form.validate_on_submit():
         # initializing instances
-        # single_listing = form.single_listing.data
-        location = form.location.data
-        description = form.description.data
-        category = form.category.data
-        bedrooms = form.bedrooms.data
-        lister_id = form.lister_id.data
-        pricing = form.pricing.data
-        image = form.image.data
-        timeslot =form.timeslot.data
+        
+        
+        email = form.email.data
+        contact = form.contact.data
+        name = form.name.data
 
 
 
-        #listing instance
-        new_single_listing = Listing(location = location, description = description, category = category,  bedrooms =  bedrooms,  pricing =  pricing, lister_id = current_user.id, image = image, timeslot = timeslot)
+        #listing instances
+        new_single_listing = Listing(email = email, contact = contact, name = name)
 
         # save review 
         new_single_listing.save_listing()
         return redirect(url_for('.single_listing', id = new_single_listing.id ))
 
     title = f'{listing.title} listing'
-    return render_template('form_listing.html', title = title, listing_form = form, single_listing = single_listing)
+    return render_template('single_listing.html', title = title, booking_form = boooking_form, booking_listing = booking_listing)
 
 
    
