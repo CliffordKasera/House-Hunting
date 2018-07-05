@@ -31,7 +31,7 @@ One Minute Pitch is a web application that will allow users to post pitches, lik
 
 
 ## View Live Site here
-View the complete site [here](https://househunt-sophia.herokuapp.com/)
+View the complete site [here](https://househunt-group.herokuapp.com/)
 
 
 ## Technologies Used
