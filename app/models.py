@@ -16,10 +16,12 @@ def load_user(user_id):
 class User(UserMixin,db.Model):
     '''
     '''
-
-    
     __tablename__ = 'users'
+
     id = db.Column(db.Integer, primary_key = True)
+    profile_pic_path = db.Column(db.String())
+    contact = db.Column(db.String(255))
+    bio = db.Column(db.String(255))
     username = db.Column(db.String(255))
     email = db.Column(db.String(255),unique = True,index = True)
     pass_secure = db.Column(db.String(255))
@@ -49,6 +51,7 @@ class Listing(db.Model):
     __tablename__ = 'listings'
 
     id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
     location = db.Column(db.String(255))
     description = db.Column(db.String(255))
     category = db.Column(db.String(255))
@@ -65,6 +68,11 @@ class Listing(db.Model):
     def get_all_listings(cls):
         listings = Listing.query.order_by('id').all()
         return listings
+
+    def save_listing(self):
+        db.session.add(self)
+        db.session.commit()
+
 
 
     def __repr__(self):
@@ -121,10 +129,26 @@ class Booking(db.Model):
     listing_id = db.Column(db.Integer, db.ForeignKey('listings.id'))
     lister_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     timeslot_id = db.Column(db.Integer, db.ForeignKey('timeslots.id'), nullable = False)
+
+
+    @classmethod
+    def get_all_bookings(cls):
+        bookings = Booking.query.order_by('id').all()
+        return bookings
+  
+    def save_booking(self):
+        db.session.add(self)
+        db.session.commit()
+
+
+   
+
+
+    
     
 
 
-
+ 
 
 
 
