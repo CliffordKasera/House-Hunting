@@ -7,6 +7,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://njeri:sophia@localhost/househunting'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'powerfulsecretkey'
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
+
 
     @staticmethod
     def init_app(app):
