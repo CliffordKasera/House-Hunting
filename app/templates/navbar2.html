@@ -17,6 +17,7 @@
                <a class="nav-item nav-link brand" href="/">Home</a>
               <li><a class="nav-item nav-link brand" href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
               <li> <a class="nav-item nav-link brand" href="{{url_for('auth.logout')}}">Sign out</a></li>
+              <a class="nav-item nav-link brand" href="/listing/new"><i class="fas fa-plus"></i> Add Listing</a>
 
                {% else %}
                <a class="nav-item nav-link brand" href="/">Home</a>
