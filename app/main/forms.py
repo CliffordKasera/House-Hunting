@@ -1,13 +1,13 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, SelectField, IntegerField, DateField, TimeField, TextAreaField, MultipleFileField
+from wtforms import StringField, SubmitField, SelectField, IntegerField, TextAreaField, MultipleFileField
 from wtforms.validators import Required, Email
+from wtforms.fields.html5 import DateField, TimeField
 from ..models import User, Booking
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import ValidationError
 
 
 class ListingForm(FlaskForm):
-    # images = MultipleFileField('Upload a few images',validators=[FileAllowed(['jpg', 'png']), Required()])
     title = StringField('Title',validators =[Required()])
     location = SelectField('Neighbourhood', choices=[('eastleigh', 'Eastleigh'), ('karen', 'Karen'),
                                                      ('kileleshwa', 'Kileleshwa'), ('Langata', 'Langata'),
@@ -23,9 +23,6 @@ class ListingForm(FlaskForm):
                                                                    ('4 Bedroom', '4 Bedroom')])
     pricing = IntegerField('Price', validators=[Required()])
     description = TextAreaField('Description', validators=[Required()])
-    # view_date = DateField('Date', validators=[Required()])
-    # view_start_time = TimeField('From', validators=[Required()])
-    # view_end_time = TimeField('To', validators=[Required()])
     submit = SubmitField('Next')
 
 
@@ -36,10 +33,18 @@ class BookingForm(FlaskForm):
     submit = SubmitField('Book')
 
 
-
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Write something about yourself',validators=[Required()])
     submit = SubmitField('Submit')
 
+
+class TimeForm(FlaskForm):
+    view_date = DateField('Date', validators=[Required()])
+    view_start_time = TimeField('From', validators=[Required()])
+    view_end_time = TimeField('To', validators=[Required()])
+    submit = SubmitField('Add Time')
+
+
 class TestForm(FlaskForm):
     submit = SubmitField('Add Time')
+

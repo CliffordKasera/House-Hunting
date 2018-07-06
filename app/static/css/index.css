@@ -80,9 +80,6 @@ a.nav-item.nav-link.brand.opaque:hover{
 }
 /* End of navbar styling*/
 
-
-
-
 /* Registration and Login Form */
 .blog-form{
     box-shadow: 2px 4px 12px 2px #dcdcdc;
@@ -99,6 +96,7 @@ input#submit.btn.btn-primary{
     margin-top: 10px;
 }
 /* End of Registration and Login Styling */
+
 /* Styling Profile Page */
 .rounded-circle{
     height: 200px;
@@ -254,7 +252,7 @@ img.card-img-top{
 
 /* Single Listing Styling */
 .listing-container{
-    /* padding-top: 10vh; */
+    padding-top: 15px;
     color: #555555;
 }
 .listing-header{
@@ -296,11 +294,6 @@ margin-top: 10px;
 /* End of Single Listing Styling */
 
 
-
-
-
-
-
 /* Form */
 label.time{
     display: block;
@@ -309,3 +302,14 @@ input.form-control.picture{
     border: 0px;
     padding-left: 0px;
 }
+
+/*Styles for the details-page*/
+.details-card{
+    padding: 20px;
+}
+#image-form{
+    padding-bottom: 20px;
+}
+/*End of styles for the details-page*/
+
+

@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..models import Listing, User, Image, Timeslot, Booking
-from .forms import ListingForm, BookingForm, UpdateProfile, TestForm
+from .forms import ListingForm, BookingForm, UpdateProfile, TestForm, TimeForm
 from flask_login import login_required, current_user
 from .. import db, photos
 
@@ -43,9 +43,6 @@ def profile(uname):
     return render_template("profile/profile.html", user = user, title=title, listings = get_all_listings, bookings=bookings)
 
 
-
-
-
 @main.route('/listing/new',methods = ['GET','POST'])
 @login_required
 def listing():
@@ -73,27 +70,22 @@ def listing():
     return render_template('listing.html', list_form = list_form)
 
 
-@main.route('/listing/<int:listing_id>/times',methods = ['GET','POST'])
+@main.route('/listing/<int:listing_id>/details',methods = ['GET','POST'])
 @login_required
 def listing_times(listing_id):
     '''
     View listing function that returns the listing page and data
     '''
-    # if current_user.is_authenticated:
     listing = Listing.query.get(listing_id)
 
-
-    if listing.user!= current_user:
+    if listing.user!=current_user:
         abort(403)
 
-    list_form = TestForm()
-    if list_form.validate_on_submit():
-        date = request.form.get("party-date"),
-        start = request.form.get("party-time")
-        stop = request.form.get("party-time2")
-        new_timeslot = Timeslot (date = date, start_time = start, end_time = stop,listing_id=listing.id)
+    time_form = TimeForm()
+    if time_form.validate_on_submit():
+        new_timeslot = Timeslot(date=time_form.view_date.data, start_time=time_form.view_start_time.data, end_time=time_form.view_end_time.data, listing_id=listing.id)
         new_timeslot.save_timeslot()
-        # return redirect(url_for('.listing_times', listing_id = listing_id))
+        return redirect(url_for('.listing_details', listing_id = listing_id))
 
     list = Listing.query.filter_by(id = listing_id).first()
     if 'photo' in request.files:
@@ -104,16 +96,12 @@ def listing_times(listing_id):
         return redirect(url_for('main.index'))
 
     title = 'New Listing'
-    return render_template('listing_times.html', list_form = list_form, listing=listing)
-
-
-
-
+    return render_template('listing_times.html', time_form = time_form, listing=listing)
 
 
 @main.route('/listing/<int:listing_id>')
 def single_listing(listing_id):
-    """View home function that returns the single listing page"""
+    """ View function that returns the single listing page """
 
     # booking_form = BookingForm()
     listing = Listing.query.get_or_404(listing_id)
