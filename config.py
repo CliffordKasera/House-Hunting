@@ -7,6 +7,8 @@ class Config:
     SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://liz:lizzie@localhost/househunting'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'powerfulsecretkey'
+    UPLOADED_PHOTOS_DEST ='app/static/photos'
+
 
     @staticmethod
     def init_app(app):
@@ -19,7 +21,8 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    pass
+    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+
 
 class TestConfig(Config):
     '''
@@ -28,7 +31,7 @@ class TestConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-    pass
+    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 class DevConfig(Config):
     '''
@@ -37,6 +40,7 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
+    # SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
     DEBUG = True
 

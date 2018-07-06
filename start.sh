@@ -1,3 +1,3 @@
-export SECRET_KEY='f48a3794b5f1a7b6d359b09ec83334ce'
-
+# export SECRET_KEY='powerfulsecretkey'
+# export DATABASE_URL='postgresql+psycopg2://liz:lizzie@localhost/househunting'
 python3.6 manage.py server

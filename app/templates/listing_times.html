@@ -1,33 +1,67 @@
+
 {% extends 'base.html'%}
-{% import 'bootstrap/wtf.html' as wtf%}
 {% block navbar %}
 
     {% include 'navbar2.html' %}
 
 {% endblock %}
+{% import 'bootstrap/wtf.html' as wtf%}
 {% block content %}
 
 
 
-<form action="{{ url_for('main.listing')}}" method="post">
-        <input type="date" id = "party-date"
-                     name="party-date" value="2018-06-12T19:30"
-                     min="2018-06-07T00:00" max="2018-06-14T00:00"/><br>
-        <label for="party-time">start</label>
+<div class="top">
 
-         <input type="time" id="party-time"
-        name="party-time" value="2018-06-12T19:30"
-        min="2018-06-07T00:00" max="2018-06-14T00:00" />
+</div>
+<div class="container">
 
-        <label for="party-time2">stop</label>
-        <input type="time" id="party-time2"
-        name="party-time2" value="2018-06-12T19:30"
-        min="2018-06-07T00:00" max="2018-06-14T00:00" />
-        <hr>
-        {{wtf.quick_form(list_form)}}
-        </form>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12 blog-form">
+                    <h3>Add Timeslots</h3>
 
-        {% endblock %}
+                    <form action="{{ url_for('main.listing_times', listing_id = listing.id)}}" method="post">
+                        <label for="party-time" class="time">Date</label>
+                        <input type="date" id = "party-date"
+                        name="party-date" value="2018-06-12T19:30"
+                        min="2018-06-07T00:00" max="2018-06-14T00:00"/><br>
+                        <label for="party-time" class="time">Start Time</label>
+                        <input type="time" id="party-time"
+                        name="party-time" value="2018-06-12T19:30"
+                        min="2018-06-07T00:00" max="2018-06-14T00:00" />
+                        <label for="party-time2" class="time">Stop Time</label>
+                        <input type="time" id="party-time2"
+                        name="party-time2" value="2018-06-12T19:30"
+                        min="2018-06-07T00:00" max="2018-06-14T00:00" />
+                        <hr>
+                        {{wtf.quick_form(list_form)}}
+                    </form>
+
+                    <div class="">
+
+                        {% if listing.featured_pic_path %}
+                        <img src="{{url_for('static',filename = listing.featured_pic_path)}}" alt="" class="img-thumbnail rounded-circle">
+                        {% else %}
+
+                        none
+                        {% endif %}
 
 
 
+                        <form action="{{url_for('main.listing_times',listing_id=listing.id)}}" method="post" enctype="multipart/form-data">
+                            <input type="file" name="photo" class="form-control picture" required >
+                            <input type="submit" name="submit" value="Upload Picture">
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+{% endblock%}
