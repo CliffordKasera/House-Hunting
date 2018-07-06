@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
 from ..models import Listing, User, Image, Timeslot, Booking
-from .forms import ListingForm, BookingForm
+from .forms import ListingForm, BookingForm, TestForm
 from flask_login import login_required, current_user
 # Views
 @main.route('/', methods = ['GET', 'POST'])
@@ -40,28 +40,77 @@ def listing():
     '''
     View listing function that returns the listing page and data
     '''
+
+
     list_form = ListingForm()
 
-    # if list_form.validate_on_submit():
-    #
-    #     new_listing = Listing( location=list_form.location.data, category = list_form.category.data, pricing = list_form.pricing.data, bedrooms = list_form.bedrooms.data, user = current_user)
-    #     new_listing.save_listing()
-    #     new_timeslot = Timeslot (date = list_form.date.data, start_time = list_form.view_start_time.data, end_time = list_form.view_end_time.data,listing_id=listing.id)
-    #
-    #     for image in list_form.image.data:
-    #     #     new_image = Im
-    #     #
-    #     # filename = photos.save(request.files['photo'])
-    #     # path = f'photos/{filename}'
-    #     # user.profile_pic_path = path
-    #     # db.session.commit()
-    #
-    #
-    #     return redirect(url_for('.index'))
+    if list_form.validate_on_submit():
+        date = request.form.get("party-date"),
+        start = request.form.get("party-time")
+        stop = request.form.get("party-time2")
+
+        new_listing = Listing( location=list_form.location.data, category = list_form.category.data, pricing = list_form.pricing.data, bedrooms = list_form.bedrooms.data, description = list_form.description.data,user = current_user)
+        
+        new_listing.save_listing()
+   
+        new_timeslot = Timeslot (date = date, start_time = start, end_time = stop,listing_id=new_listing.id)
+        new_timeslot.save_timeslot()
+        return redirect(url_for('.index'))
 
 
     title = 'New Listing'
     return render_template('listing.html', list_form = list_form)
+
+
+@main.route('/listing/<int:listing_id>/times',methods = ['GET','POST'])
+@login_required
+def listing_times(listing_id):
+    '''
+    View listing function that returns the listing page and data
+    '''
+    # if current_user.is_authenticated:
+    listing = Listing.query.get(listing_id)
+    if listing.user!= current_user:
+        abort(403)
+
+    list_form = TestForm()
+    if list_form.validate_on_submit():
+        date = request.form.get("party-date"),
+        start = request.form.get("party-time")
+        stop = request.form.get("party-time2")   
+        new_timeslot = Timeslot (date = date, start_time = start, end_time = stop,listing_id=listing.id)
+        new_timeslot.save_timeslot()
+        return redirect(url_for('.listing_times', id = listing_id))
+
+
+    title = 'New Listing'
+    return render_template('listing.html', list_form = list_form)
+
+
+@main.route('/listing/<int:listing_id>', methods = ['GET','POST'])
+def single_listing(listing_id):
+    """View home function that returns the single listing page"""
+
+    booking_form = BookingForm()
+    test_form = TestForm()
+    listing = Listing.query.get_or_404(listing_id)
+    timeslots = Timeslot.query.filter_by(listing_id=listing_id).all()
+
+    if test_form.validate_on_submit():
+        date = request.form.get("party-date"),
+        start = request.form.get("party-time")
+        stop = request.form.get("party-time2")
+       
+
+        new_timeslot = Timeslot (date = date, start_time = start, end_time = stop,listing_id = listing_id)
+        print (new_timeslot)
+        new_timeslot.save_timeslot()
+    
+
+    title = 'Home | Boma Listing'
+    return render_template('single-listing.html', title = title, booking_form=booking_form, listing=listing, timeslots=timeslots, test_form=test_form)
+
+
 
 
 @main.route('/user/<uname>/update',methods = ['GET','POST'])

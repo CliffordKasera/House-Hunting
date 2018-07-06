@@ -1,4 +1,3 @@
-# File for models/classes
 from . import db
 from datetime import date, time
 from . import login_manager
@@ -58,12 +57,13 @@ class Listing(db.Model):
     bedrooms = db.Column(db.String(255))
     pricing = db.Column(db.Integer)
     lister_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
+    # one_image_path = db.Column(db.String(255))
     image  = db.relationship('Image', backref = 'listing', lazy = 'dynamic')
     timeslot = db.relationship('Timeslot', backref = 'listing', lazy = 'dynamic')
     booking = db.relationship('Booking', backref = 'listing', lazy = 'dynamic')
 
 
-    
+
     @classmethod
     def get_all_listings(cls):
         listings = Listing.query.order_by('id').all()
@@ -83,7 +83,6 @@ class Listing(db.Model):
 class Image(db.Model):
     '''
     '''
-
     __tablename__ = 'images'
 
     id = db.Column(db.Integer, primary_key = True)
@@ -118,6 +117,9 @@ class Timeslot(db.Model):
         timeslots = Timeslot.query.order_by('id').all()
         return timeslots
 
+    def save_timeslot(self):
+        db.session.add(self)
+        db.session.commit()
 
 class Booking(db.Model):
     '''
@@ -135,21 +137,7 @@ class Booking(db.Model):
     def get_all_bookings(cls):
         bookings = Booking.query.order_by('id').all()
         return bookings
-  
+
     def save_booking(self):
         db.session.add(self)
         db.session.commit()
-
-
-   
-
-
-    
-    
-
-
- 
-
-
-
-

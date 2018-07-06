@@ -1,0 +1,32 @@
+.listing-container{
+    padding-top: 10vh;
+    color: #555555;
+}
+.listing-header{
+    margin-bottom: 20px;
+    padding: 10px;
+}
+.left-col{
+    margin: 20px;
+}
+table{
+    width: 100%;
+    margin-bottom: 20px;
+}
+td {
+    padding: 12px;
+    font-size: 20px;
+
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.btn-book{
+    color: #fff;
+    background-color: #008b8b;
+    border-radius: 0;
+    margin: 20px;
+    float: right;
+}
+#booking-form{
+    padding: 20px;
+}

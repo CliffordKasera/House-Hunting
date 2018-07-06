@@ -26,14 +26,14 @@ class TestConfig(Config):
     Testing configuration child class
 
     Args:
-        Config: The parent configuration class with General configuration settings 
+        Config: The parent configuration class with General configuration settings
     '''
     pass
 
 class DevConfig(Config):
     '''
     Development configuration child class
-    
+
     Args:
         Config: The parent configuration class with General configuration settings
     '''
