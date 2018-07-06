@@ -8,8 +8,4 @@ venv/
 venv/
 .idea/
 
-migrations/
-
-
-migrations/
 * __pycache__/
