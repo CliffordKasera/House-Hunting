@@ -299,7 +299,14 @@ margin-top: 10px;
 
 
 
-
+/*Styles for the details-page*/
+.details-card{
+    padding: 20px;
+}
+#image-form{
+    padding-bottom: 20px;
+}
+/*End of styles for the details-page*/
 
 /* Form */
 label.time{

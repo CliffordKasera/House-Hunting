@@ -101,7 +101,7 @@ def listing_times(listing_id):
         path = f'photos/{filename}'
         list.featured_pic_path = path
         db.session.commit()
-        return redirect(url_for('main.index'))
+        # return redirect(url_for('main.index'))
 
     title = 'New Listing'
     return render_template('listing_times.html', list_form = list_form, listing=listing)
