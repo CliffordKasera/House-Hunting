@@ -4,8 +4,12 @@ virtual/
 .vscode/
 venv/
 .idea/
-config.py
+
+venv/
+.idea/
+
 migrations/
-start.sh
 
 
+migrations/
+* __pycache__/
