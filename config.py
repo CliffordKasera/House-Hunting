@@ -1,12 +1,6 @@
 import os
 
 class Config:
-    '''
-    General configuration parent class
-    '''
-    SQLALCHEMY_DATABASE_URI='postgresql+psycopg2://njeri:sophia@localhost/househunting'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = 'powerfulsecretkey'
 
     @staticmethod
     def init_app(app):
